@@ -29,11 +29,13 @@ Test by running these queries:
 or queries in article: http://www.postgresonline.com/article_pfriendly/302.html
 
  - Simple just puts circle centered about ST_Point(0,0) and 100 units in height
-`SELECT ST_LettersAsGeometry('Circle', 'kankin');`
+```sql
+SELECT ST_LettersAsGeometry('Circle', 'kankin');
+```
 
  - More complex inscribes circle in a circle rotated -
  - requires PostGIS 2.0+
-```
+```sql
  WITH cte As (
   SELECT ST_LettersAsGeometry('Postgres+PostGIS=cewl'
    , 'kankin', 0, 150, ST_Point(10,2)) As geom)
