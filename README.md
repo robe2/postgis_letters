@@ -15,7 +15,7 @@ This extension comes packaged with one set of fonts kankin. http://fontfabric.co
   This is only needed to rebuilt the .sql files in sql folder
   
 ### Build ###  
-make
+make all
 
 # Install ##
  - copy the contents of sql folder to your PostgreSQL share/extension folder

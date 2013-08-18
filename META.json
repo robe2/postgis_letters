@@ -9,7 +9,7 @@
 	"provides": {
 		"postgis_letters": {
 			"abstract": "PostGIS Letters",
-			"version": "0.0.3",
+			"version": "0.0.4",
 			"file": "sql/postgis_letters.sql",
 			"docfile": "doc/postgis_tiger_geocoder.md"
 		}
