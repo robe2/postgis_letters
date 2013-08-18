@@ -1,0 +1,37 @@
+CREATE TABLE IF NOT EXISTS font_set(letter char(1), glyph_name character varying(64),
+    horiz_adv_x integer, geom geometry(Multipolygon), font_name varchar(50), packaged_font boolean NOT NULL DEFAULT false
+  , CONSTRAINT pk_font_set PRIMARY KEY (letter,font_name));
+
+DELETE FROM font_set WHERE packaged_font = true;
+SELECT pg_catalog.pg_extension_config_dump('font_set', 'WHERE packaged_font=false');
+
+-- example use: SELECT name, ST_Collect(the_geom,ST_LettersAsGeometry(name, 'kankin', ST_SRID(the_geom),1000, ST_Centroid(the_geom))) As geom  FROM neighborhoods
+CREATE OR REPLACE FUNCTION ST_LettersAsGeometry(letters text, afont text, srid integer DEFAULT 0, text_height double precision DEFAULT 100, start_position geometry DEFAULT ST_Point(0,0)) 
+ RETURNS geometry
+AS
+$$
+  WITH letters As
+   (SELECT geom, width, sum(width + 1) OVER (ORDER By pos) As run_length
+        FROM (SELECT geom, letter,ROW_NUMBER() OVER() As pos, horiz_adv_x As width
+                , ST_YMax(geom) As height
+        FROM font_set CROSS JOIN regexp_split_to_table(replace($1, ' ',E'\t'), E'') As l 
+        WHERE letter = replace(l, E'\t', ' ') AND font_name = $2) As foo
+  )
+  , the_word AS
+  	( SELECT ST_Collect(
+     ST_Translate(geom, run_length - width,0) 
+     ) As word_geom
+     FROM letters) 
+  SELECT 
+  -- translate so bottom is flush with start_position bottom
+  	ST_Translate(geo_ref_word, - ST_XMin(geo_ref_word) + ST_XMin($5), - ST_YMin(geo_ref_word) + ST_YMin($5)  ) As geom
+  	FROM (SELECT 
+  	-- set srid to that of srid
+  		ST_SetSRID(
+  	-- Move so starts at origin, scale proportional to text_height/height(word_geom)
+  		ST_TransScale(word_geom, -ST_XMin(word_geom), -ST_YMin(word_geom)
+  		, $4/(ST_YMax(word_geom) - ST_YMin(word_geom)) 
+  		, $4/(ST_YMax(word_geom) - ST_YMin(word_geom))  ),$3) As geo_ref_word
+  	FROM the_word) As foo
+$$
+language 'sql';

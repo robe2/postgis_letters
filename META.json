@@ -1,0 +1,37 @@
+{
+	"name": "postgis_letters",
+	"abstract": "PostGIS Letter writer",
+	"description": "This module provides some sample vectorized fonts and functions to write letters on geometries and rasters",
+	"version": "0.0.3",
+	"release_status": "unstable",
+	"maintainer": "Leo Hsu and Regina Obe",
+	"license": "mit",
+	"provides": {
+		"postgis_letters": {
+			"abstract": "PostGIS Letters",
+			"version": "0.0.3",
+			"file": "sql/postgis_letters.sql",
+			"docfile": "doc/postgis_tiger_geocoder.md"
+		}
+	}
+	"prereqs": {
+      "runtime": {
+         "requires": {
+            "plpgsql": 0,
+            "PostgreSQL": "9.1",
+            "postgis": "2.0"
+         }
+      }
+    },
+    "generated_by": "Regina O. Obe",
+	"meta-spec": {
+		"version": "1.0.0",
+		"url": "http://pgxn.org/meta/spec.txt"
+	},
+	"tags": [
+		"gis",
+		"spatial",
+		"geometry",
+		"location", "raster", "vector", "typography"
+	]
+}
