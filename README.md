@@ -33,8 +33,11 @@ or queries in article: http://www.postgresonline.com/article_pfriendly/302.html
 
  - More complex inscribes circle in a circle rotated -
  - requires PostGIS 2.0+
- With cte As (SELECT ST_LettersAsGeometry('Postgres+PostGIS=cewl', 'kankin', 0, 150, ST_Point(10,2)) As geom)
+{% geshi 'sql' %}
+ With cte As (SELECT ST_LettersAsGeometry('Postgres+PostGIS=cewl'
+   , 'kankin', 0, 150, ST_Point(10,2)) As geom)
  `SELECT i, ST_rotate(geom,pi()/4*i, ST_Point(10,2))
     FROM cte cross join generate_series(1,8) i
   UNION ALL
-  SELECT 9, ST_Boundary(ST_Buffer(ST_Point(10,2), 1000));`
+  SELECT 9, ST_Boundary(ST_Buffer(ST_Point(10,2), 1000));
+{% endgeshi %}
