@@ -24,7 +24,7 @@ make all
  - in database you want to use it in at psql prompt type
  `CREATE EXTENSION postgis_letters;`
 
-### Usage ###
+## Usage ##
 Test by running these queries:
 or queries in article: http://www.postgresonline.com/article_pfriendly/302.html
 
