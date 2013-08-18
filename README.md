@@ -17,7 +17,7 @@ This extension comes packaged with one set of fonts kankin. http://fontfabric.co
 ### Build ###  
 make all
 
-# Install ##
+### Install ###
  - copy the contents of sql folder to your PostgreSQL share/extension folder
  -  If you installed PostGIS without extension on 9.1 (because you did not compile with raster) 
     just take out the requires line in postgis_letters.control
