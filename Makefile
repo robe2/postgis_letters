@@ -1,6 +1,6 @@
 EXTENSION    = postgis_letters
-EXTVERSION    = 0.0.4
-MINORVERSION  = 2013.8.18
+EXTVERSION    = 0.0.5
+MINORVERSION  = 2021.11.13
 
 MICRO_NUMBER  = $(shell echo $(EXTVERSION) | sed "s/[0-9]\.[0-9]\.\([0-9]*\)[a-zA-Z]*[0-9]*/\1/")
 PREREL_NUMBER = $(shell echo $(EXTVERSION) | \
