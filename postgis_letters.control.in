@@ -1,5 +1,6 @@
 # postgis letter writter
 comment = 'PostGIS letter writter for writting on geometries and rasters'
-default_version = '0.0.4'
+default_version = '0.0.5'
 relocatable = true
+superuser= false
 requires = 'postgis'
