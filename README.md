@@ -12,7 +12,7 @@ This extension comes packaged with one set of fonts kankin. http://fontfabric.co
 - PostgreSQL 9.1+
 - PostGIS 2.0+
 - Posix shell for building (e.g. Linux/Unix/mingw/cygwin)
-  This is only needed to rebuilt the .sql files in sql folder
+  This is only needed to rebuild the .sql files in sql folder
   
 ### Build ###  
 make all
